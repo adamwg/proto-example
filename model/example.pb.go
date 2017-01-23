@@ -7,6 +7,7 @@ Package model is a generated protocol buffer package.
 
 It is generated from these files:
 	model/example.proto
+	model/server.proto
 
 It has these top-level messages:
 	User
@@ -14,6 +15,16 @@ It has these top-level messages:
 	PostContent
 	Attachment
 	File
+	RegisterUserRequest
+	RegisterUserResponse
+	AuthenticateRequest
+	AuthenticateResponse
+	GetUserNameRequest
+	GetUserNameResponse
+	PostRequest
+	PostResponse
+	ReadRequest
+	ReadResponse
 */
 package model
 

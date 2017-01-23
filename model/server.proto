@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package model;
+
+import "model/example.proto";
+
+// Posts is a service for users to post.
+service Posts {
+    // RegisterUser registers a user.
+    rpc RegisterUser(RegisterUserRequest) returns (RegisterUserResponse) {}
+    // Authenticate authenticates a user.
+    rpc Authenticate(AuthenticateRequest) returns (AuthenticateResponse) {}
+    // GetUserName gets a user's name.
+    rpc GetUserName(GetUserNameRequest) returns (GetUserNameResponse) {}
+    // Post creates a post.
+    rpc Post(PostRequest) returns (PostResponse) {}
+    // Read gets posts.
+    rpc Read(ReadRequest) returns (stream ReadResponse) {}
+}
+
+message RegisterUserRequest {
+    // User is the user's info. It is an error to specify a user ID.
+    User user = 1;
+}
+
+message RegisterUserResponse {
+    // Id is the ID assigned to the user.
+    string id = 1;
+}
+
+message AuthenticateRequest {
+    // UserId is the ID of the user authenticating.
+    string user_id = 1;
+    // Password is the user's hashed password.
+    bytes password = 2;
+}
+
+message AuthenticateResponse {
+    // Token is an authentication token that can be used to post.
+    string token = 1;
+}
+
+message GetUserNameRequest {
+    // UserId is the ID of the user whose name is requested.
+    string user_id = 1;
+}
+
+message GetUserNameResponse {
+    // UserName is the name of the user.
+    string user_name = 1;
+}
+
+message PostRequest {
+    // Token is the authentication token for this post request. The user ID in
+    // the post must match the user that was granted this token.
+    string token = 1;
+    // Post is the post. If an ID is specified it will be ignored.
+    Post post = 2;
+}
+
+message PostResponse {
+    // Id is the ID assigned to the post.
+    uint64 id = 1;
+}
+
+message ReadRequest {
+    // PostIds is the set of post IDs requested. If empty, all posts will be
+    // returned.
+    repeated uint64 post_ids = 1;
+}
+
+message ReadResponse {
+    // Post is a single post. ReadResponses will be streamed to the client if
+    // multiple posts are requested.
+    Post post = 1;
+}

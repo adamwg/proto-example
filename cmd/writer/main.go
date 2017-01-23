@@ -17,7 +17,7 @@ func main() {
 		Password: sha3.New512().Sum([]byte("password")),
 	}
 
-	photo, err := createPhoto("rabbit.txt")
+	photo, err := createFileAttachment("rabbit.txt")
 	if err != nil {
 		panic("file read error")
 	}
@@ -44,7 +44,7 @@ func main() {
 	log.Println("Wrote post to saved-post")
 }
 
-func createPhoto(fname string) (*model.File, error) {
+func createFileAttachment(fname string) (*model.File, error) {
 	ret := &model.File{
 		MimeType: "text/plain",
 	}
