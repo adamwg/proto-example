@@ -3,7 +3,6 @@ package main
 import (
 	"io/ioutil"
 	"log"
-	"time"
 
 	"github.com/adamwg/proto-example/model"
 	"github.com/golang/protobuf/proto"
@@ -13,10 +12,9 @@ import (
 
 func main() {
 	me := &model.User{
-		Id:            uuid.New(),
-		Name:          "Adam Wolfe Gordon",
-		Password:      sha3.New512().Sum([]byte("password")),
-		LastLoginTime: time.Now().UnixNano(),
+		Id:       uuid.New(),
+		Name:     "Adam Wolfe Gordon",
+		Password: sha3.New512().Sum([]byte("password")),
 	}
 
 	photo, err := createPhoto("rabbit.txt")
@@ -24,7 +22,7 @@ func main() {
 		panic("file read error")
 	}
 	post := &model.Post{
-		Id:     uuid.New(),
+		Id:     uint64(1),
 		UserId: me.Id,
 		Content: &model.PostContent{
 			Text: "Look at my rabbit!",

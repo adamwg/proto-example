@@ -10,14 +10,12 @@ message User {
     string name = 2;
     // Password is the user's hashed password.
     bytes password = 3;
-    // LastLoginTime is the unix timestamp of the user's last login.
-    int64 last_login_time = 4;
 }
 
 // Post is a post from a user.
 message Post {
     // Id is the unique ID of this post.
-    string id = 1;
+    uint64 id = 1;
     // UserId is the ID of the user who posted this post.
     string user_id = 2;
     // Content is the content of the post.
