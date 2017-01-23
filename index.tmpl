@@ -1,0 +1,27 @@
+<html>
+
+<head>
+<title>Posts, the hot social network for 2017</title>
+</head>
+
+<body>
+  <h1>Posts</h1>
+  <table width="50%" border="1">
+    {{range .}}
+    <tr>
+      <td>
+        {{.Content.Text}}<br/>
+        {{range .Content.Attachments}}
+        {{if .GetUrl}}
+        <a href="{{.GetUrl}}">{{.GetUrl}}</a><br/>
+        {{else if .GetFile}}
+        <img src="data:{{.GetFile.MimeType}};base64,{{.GetFile.Content | base64}}"/><br/>
+        {{end}}
+        {{end}}
+      </td>
+    </tr>
+    {{end}}
+  </table>
+</body>
+
+</html>
